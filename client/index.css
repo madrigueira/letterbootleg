@@ -8,5 +8,50 @@
 }
 
 body {
+  background-color: #1F262D;
+}
+
+.Header {
+  display: flex;
+  width: 100%;
+  height: 75px;
   background-color: #14181C;
+}
+.Header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Header .container img {
+  max-width: 275px;
+}
+.Header .container nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.Header .container nav a {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  color: #9ab;
+  transition: 0.2s;
+}
+.Header .container nav a:hover {
+  color: #e6eaee;
+}
+.Header .container nav a.logar {
+  padding: 5px 10px;
+  background-color: #FF008F;
+  border-radius: 5px;
+  color: #fff;
+}
+.Header .container nav a.logar:hover {
+  background-color: #d60078;
 }/*# sourceMappingURL=index.css.map */
