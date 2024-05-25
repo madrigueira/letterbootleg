@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 .poster:hover {
-  transform: scale(1.05);
+  opacity: 0.75;
 }
 
 * {
@@ -62,7 +62,7 @@ body {
   display: flex;
   align-items: center;
   gap: 30px;
-  z-index: 1;
+  z-index: 111;
 }
 .Header .container nav a {
   font-size: 13px;
@@ -152,9 +152,4 @@ body {
   text-decoration: none;
   color: #fff;
   border-bottom: 0.5px solid #9ab;
-}
-.Home .container .grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
 }/*# sourceMappingURL=index.css.map */

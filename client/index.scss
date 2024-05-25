@@ -37,7 +37,7 @@ $orange: #FF793A;
   cursor: pointer;
 
   &:hover{
-    transform: scale(1.05);
+    opacity: .75;
   }
 }
 
@@ -81,7 +81,7 @@ body{
       display: flex;
       align-items: center;
       gap: 30px;
-      z-index: 1;
+      z-index: 111;
 
       a{
         font-size: 13px;
@@ -187,12 +187,6 @@ body{
         color: $white;
         border-bottom: .5px solid $fontGrey;
       }
-    }
-
-    .grid{
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
     }
   }
 }
