@@ -16,7 +16,6 @@
   aspect-ratio: 1/1.5;
   background-size: cover;
   border: 1px solid #9ab;
-  border-style: inset;
   border-radius: 5px;
   transition: 0.2s;
   cursor: pointer;
@@ -152,4 +151,64 @@ body {
   text-decoration: none;
   color: #fff;
   border-bottom: 0.5px solid #9ab;
+}
+
+.Log {
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, #1F262D 0%, #14181C 75%);
+}
+.Log #filmeForm {
+  opacity: 0;
+}
+.Log .container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Log .container .inputSearchMovie {
+  display: flex;
+  width: 65%;
+  margin: 90px auto 60px auto;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 60px;
+  text-align: center;
+  font-size: 28px;
+}
+.Log .container .inputSearchMovie:focus {
+  outline: none;
+}
+.Log .container .moviesSearched {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+}
+
+.popupMovieLog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transform: translateY(0vh);
+  transition: 0.2s;
+}
+.popupMovieLog.active {
+  transform: translateY(0vh);
+}
+.popupMovieLog .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 30px;
+  background-color: #0080FF;
 }/*# sourceMappingURL=index.css.map */

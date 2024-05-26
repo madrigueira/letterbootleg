@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/client/assets/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/client/index.css">
+  <title>Log - Letterbootleg</title>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <div class="Log">
+    <div class="container">
+      <input type="text" class="inputSearchMovie" placeholder="Procure seu filme..."> 
+      <div class="moviesSearched">
+      </div>
+    </div> 
+  </div>
+
+  <div class="popupMovieLog">
+    <div class="container">
+      <form id="filmeForm">
+        <button type="button" onclick="closePopup()"></button>
+        <input type="text" id="titulo" placeholder="Título" required>
+        <input type="number" id="ano" placeholder="Ano" required>
+        <input type="text" id="poster" placeholder="Poster" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/client/scripts/jquery.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
