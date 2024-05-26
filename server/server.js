@@ -24,6 +24,7 @@ const filmeSchema = new mongoose.Schema({
   titulo: String,
   poster: String,
   ano: Number,
+  nota: Number,
 });
 
 const Filme = mongoose.model('Filme', filmeSchema);
@@ -44,6 +45,33 @@ app.post('/filmes', async (req, res) => {
     res.status(201).json(filmeSalvo);
   } catch (err) {
     res.status(400).send(err);
+  }
+});
+
+app.delete('/filmes/:id', async (req, res) => {
+  try {
+    const filme = await Filme.findByIdAndDelete(req.params.id);
+    if (!filme) {
+      return res.status(404).send('Filme não encontrado');
+    }
+    res.status(200).send('Filme deletado com sucesso');
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.put('/filmes/:id', async (req, res) => {
+  try {
+    const filme = await Filme.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!filme) {
+      return res.status(404).send('Filme não encontrado');
+    }
+    res.status(200).json(filme);
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 

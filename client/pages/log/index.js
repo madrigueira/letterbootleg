@@ -1,21 +1,25 @@
 // Linkando os components via load JQuery 
 $("#header").load("/client/components/header/index.html");
 
+const formLogMovie = document.getElementById('formLogMovie');
 
-filmeForm.addEventListener('submit', async (e) => {
+formLogMovie.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const titulo = document.getElementById('titulo').value;
     const ano = document.getElementById('ano').value;
     const poster = document.getElementById('poster').value;
+    const nota = document.querySelector('input[name="nota"]:checked').value;
 
     const response = await fetch('http://localhost:3000/filmes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ titulo, ano, poster })
+        body: JSON.stringify({ titulo, ano, poster, nota })
     });
+
+    console.log(nota)
     alert("filme cadastrado!")
 });
 
@@ -46,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 nome.addEventListener("click", function() {
                     document.querySelector(".popupMovieLog").classList.add("active")
+                    document.querySelector(".posterPopup").style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${movie.poster_path})`;
                     document.getElementById('titulo').value = movie.title
                     document.getElementById('ano').value = movie.release_date.slice(0, 4)
                     document.getElementById('poster').value = movie.poster_path
