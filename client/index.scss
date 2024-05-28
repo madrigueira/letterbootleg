@@ -31,7 +31,6 @@ $orange: #FF793A;
   aspect-ratio: 1/1.5;
   background-size: cover;
   border: 1px solid $fontGrey;
-  border-style: inset;
   border-radius: 5px;
   transition: .2s;
   cursor: pointer;
@@ -186,6 +185,236 @@ body{
         text-decoration: none;   
         color: $white;
         border-bottom: .5px solid $fontGrey;
+      }
+    }
+  }
+}
+
+// Log - Cadastro do filme
+.Log{
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, $bgGrey 0%, $darkGrey 75%); 
+
+  #filmeForm{
+    opacity: 0;
+  }
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
+
+    .inputSearchMovie{
+      display: flex;
+      width: 65%;
+      margin: 90px auto 60px auto;
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 60px;
+      text-align: center;
+      font-size: 28px;
+
+      &:focus{
+        outline: none;
+      }
+    }
+
+    .moviesSearched{
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+    }
+  }
+}
+
+.popupMovieLog{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transform: translateY(-100vh);
+  transition: .4s;
+
+  &.active{
+    transform: translateY(0vh);
+  }
+
+  .container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 30px;
+    padding: 45px;
+    background-color: darken($bgGrey, 9);
+    border-radius: 30px;
+
+    .btnClosePopup{
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      justify-content: center;
+      width: 40px;
+      aspect-ratio: 1/1;
+      background-color: transparent;
+      border: 0;
+      font-size: 40px;
+      line-height: 35px;
+      transition: .2s;
+      cursor: pointer;
+
+      &:hover{
+        color: darken($fontGrey, 15);
+      }
+    }
+
+    .posterPopup{
+      max-width: 200px;
+    }
+
+    #formLogMovie{
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      margin-left: 45px;
+
+      input{
+        background-color: transparent;
+        border: 0;
+        font-size: 26px;
+        font-weight: 300;
+
+        &:focus{
+          outline: none;
+        }
+
+        &#poster{
+          opacity: 0;
+          height: 0;
+        }
+      }
+
+      .starsLog{
+        margin-right: auto;
+        transform: translateY(-15px);
+        
+        &:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+        }
+
+        &:not(:checked) > label {
+            float:right;
+            width:1em;
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:30px;
+            color:$fontGrey;
+        }
+
+        &:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+        & > input:checked ~ label {
+            color: $pink;    
+        }
+
+        &:not(:checked) > label:hover,
+        &:not(:checked) > label:hover ~ label {
+            color: darken($pink, 15);  
+        }
+
+        & > input:checked + label:hover,
+        & > input:checked + label:hover ~ label,
+        & > input:checked ~ label:hover,
+        & > input:checked ~ label:hover ~ label,
+        & > label:hover ~ input:checked ~ label {
+          color: darken($pink, 15); 
+        }
+      }
+
+      button{
+        max-width: 100px;
+        margin-top: auto;
+        padding: 5px 10px;
+        background-color: $pink;
+        border: 0;
+        border-radius: 5px;
+        font-weight: 800;
+        color: $white;
+        transition: .2s;
+        cursor: pointer;
+
+        &:hover{
+          background-color: darken($pink, 8);
+        }
+      }
+    }
+  }
+}
+
+// Filmes- Lista de filmes assistidos
+.Filmes{
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, $bgGrey 0%, $darkGrey 75%); 
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
+
+    .gridMovies{
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+      margin-top: 60px;
+
+      .poster{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px 5px;
+
+        &:hover{
+          a{
+            opacity: 1;
+          }
+        }
+
+        a{
+          width: 50px;
+          background-color: transparentize($darkGrey, .15);
+          border: 1px solid $white;
+          border-radius: 50px;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 400;
+          color: $white;
+          transition: .2s;
+          opacity: 0;
+        }
+
+        button{
+          height: 30px;
+        }
       }
     }
   }

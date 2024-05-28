@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/client/assets/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/client/index.css">
+  <title>Log - Letterbootleg</title>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <div class="Log">
+    <div class="container">
+      <input type="text" class="inputSearchMovie" placeholder="Procure seu filme..."> 
+      <div class="moviesSearched">
+      </div>
+    </div> 
+  </div>
+
+  <div class="popupMovieLog">
+    <div class="container">
+      <button class="btnClosePopup" onclick="closePopup()">&#x292C;</button>
+      <div class="poster posterPopup"></div>
+      <form id="formLogMovie">
+        <input type="text" id="titulo" placeholder="Título" required readonly>
+        <input type="text" id="ano" placeholder="Ano" required readonly>
+        <input type="text" id="poster" placeholder="Poster" required readonly>
+        <div class="starsLog">
+          <input type="radio" id="star5" name="nota" value="5" />
+          <label for="star5" title="text">5 stars</label>
+          <input type="radio" id="star4" name="nota" value="4" />
+          <label for="star4" title="text">4 stars</label>
+          <input type="radio" id="star3" name="nota" value="3" />
+          <label for="star3" title="text">3 stars</label>
+          <input type="radio" id="star2" name="nota" value="2" />
+          <label for="star2" title="text">2 stars</label>
+          <input type="radio" id="star1" name="nota" value="1" />
+          <label for="star1" title="text">1 star</label>
+        </div>
+        <button type="submit">Logar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/client/scripts/jquery.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
