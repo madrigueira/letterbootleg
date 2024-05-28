@@ -1,90 +1,98 @@
-// Linkando os components via load JQuery 
-$("#header").load("/client/components/header/index.html");
-const favoriteGrid = document.querySelector(".favoriteGrid")
-
-function preencherDivs() {
-  var currentDivs = favoriteGrid.querySelectorAll('.poster').length;
-  
-  for (var i = currentDivs; i < 4; i++) {
-      var newDiv = document.createElement('div');
-      newDiv.className = 'poster';
-      favoriteGrid.appendChild(newDiv);
-
-      newDiv.addEventListener("click", async function() {
-        const response = await fetch('http://localhost:3000/filmes');
-        const filmes = await response.json();
-        const filmesFiltrados = filmes.filter(filme => filme.favorito != true);
-        const test = document.querySelector(".test")
-        filmesFiltrados.forEach(filme => {
-          const a1 = document.createElement('a');
-          a1.textContent = filme.titulo
-          a1.addEventListener("click", async function(){
-            editFilme(filme._id, true)
-          },{ once: true })
-          test.appendChild(a1);
-        }) 
-      })
-  }
-
-  console.log(currentDivs)
+// Abrir e fechar menu de navegação (Nav) no mobile
+function toggleNav() {
+  const nav = document.querySelector("nav");
+  nav.classList.toggle("active");
 }
 
-const filmeList = document.querySelector('.favoriteGrid');
+// Fechar popup de lista de filme
+function togglePopupList() {
+  document.querySelector(".popupList").classList.toggle("active");
+}
+
+// Preencher posters quando não tiver favorito
+const favoriteGrid = document.querySelector(".favoriteGrid");
+const popupList = document.querySelector(".popupList");
+const list = document.querySelector(".list");
+function preencherDivs() {
+  var currentDivs = favoriteGrid.querySelectorAll(".poster").length;
+
+  for (var i = currentDivs; i < 4; i++) {
+    var fakePoster = document.createElement("div");
+    fakePoster.className = "poster";
+    favoriteGrid.appendChild(fakePoster);
+
+    fakePoster.addEventListener("click", async function () {
+      const response = await fetch("http://localhost:3000/filmes");
+      const filmes = await response.json();
+      const filmesFiltrados = filmes.filter((filme) => filme.favorito != true);
+      list.innerHTML = "";
+      togglePopupList();
+
+      filmesFiltrados.forEach((filme) => {
+        const tituloFilme = document.createElement("p");
+        tituloFilme.textContent = filme.titulo;
+        tituloFilme.addEventListener(
+          "click",
+          async function () {
+            editFavorito(filme._id, true);
+            togglePopupList();
+          },
+          { once: true }
+        );
+        list.appendChild(tituloFilme);
+      });
+    });
+  }
+}
 
 async function loadFilmes() {
-  const response = await fetch('http://localhost:3000/filmes');
+  const response = await fetch("http://localhost:3000/filmes");
   const filmes = await response.json();
-  const filmesFiltrados = filmes.filter(filme => filme.favorito == true);
-  filmesFiltrados.forEach(filme => {
-      const div = document.createElement('div');
-      const a1 = document.createElement('a');
-      const a2 = document.createElement('a');
-      const button = document.createElement('button');
-      const button2 = document.createElement('button');
-      div.classList.add("poster")
-      div.style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${filme.poster})`;
-      a1.textContent = filme.ano
-      a2.textContent = `★ ${filme.nota}`
-      filmeList.appendChild(div);
-      div.appendChild(a1);
-      div.appendChild(a2);
-      div.appendChild(button);
+  const filmesFiltrados = filmes.filter((filme) => filme.favorito == true);
 
-      button.addEventListener("click", function() {
-        editFilme(filme._id, false);
-      })
+  filmesFiltrados.forEach((filme) => {
+    const poster = document.createElement("div");
+    const infoAno = document.createElement("a");
+    const infoNota = document.createElement("a");
+    const boxButtons = document.createElement("div");
+    const buttonEdit = document.createElement("button");
+    poster.classList.add("poster");
+    poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${filme.poster})`;
+    infoAno.textContent = filme.ano;
+    infoNota.textContent = `★ ${filme.nota}`;
+    boxButtons.classList.add("boxButtons");
+    favoriteGrid.appendChild(poster);
+    poster.appendChild(infoAno);
+    poster.appendChild(infoNota);
+    poster.appendChild(boxButtons);
+    boxButtons.appendChild(buttonEdit);
+
+    buttonEdit.addEventListener("click", function () {
+      editFavorito(filme._id, false);
+    });
   });
 }
 
+async function editFavorito(id, favorito) {
+  const response = await fetch(`http://localhost:3000/filmes/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ favorito }),
+  });
 
-async function editFilme(id, favorito) {
-      // e.preventDefault();
-      console.log("kekna")
-  
-      const response = await fetch(`http://localhost:3000/filmes/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ favorito })
-      });
-  
-      if (response.ok) {
-        console.log("filme cadastrado!")
-        favoriteGrid.innerHTML = ''
-        executarFuncoes();
-    } else {
-        console.log('Erro ao deletar filme');
-    }
+  if (response.ok) {
+    favoriteGrid.innerHTML = "";
+    executarFuncoes();
+  } else {
+    alert("Erro ao deletar filme");
+  }
 }
 
-// loadFilmes()
-// preencherDivs()
-
+// Executa as duas funções na ordem
 async function executarFuncoes() {
-  await loadFilmes(); // Aguarda a conclusão da adição das divs
-  preencherDivs(); // Verifica a quantidade de divs
+  await loadFilmes();
+  preencherDivs();
 }
-
-// Chama a função que executa ambas as funções
 executarFuncoes();

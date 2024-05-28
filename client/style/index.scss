@@ -1,0 +1,605 @@
+// Fontes
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Cores
+$white: #fff;
+$darkGrey: #14181C;
+$bgGrey: #1F262D;
+$fontGrey: #9ab;
+$blue: #0080FF;
+$pink: #FF008F;
+$orange: #FF793A;
+
+// Componentes
+@mixin scrollBar {
+  overflow: hidden auto;
+  scrollbar-width: 2px;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: lighten($darkGrey, 25);
+    border-radius: 15px;
+  }
+}
+
+.subtitle{
+  h5{
+    padding: 4px 0;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  hr{
+    opacity: .5;
+    margin-bottom: 10px;
+  }
+}
+
+.poster{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  aspect-ratio: 1/1.5;
+  padding: 10px 5px;
+  background-size: cover;
+  border: 1px solid $fontGrey;
+  border-radius: 5px;
+  transition: .2s;
+  cursor: pointer;
+
+  &:hover{
+    opacity: .75;
+
+    a, .boxButtons{
+      opacity: 1;
+    }
+  }
+
+  a{
+    width: 50px;
+    background-color: transparentize($darkGrey, .15);
+    border: 1px solid $white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: $white;
+    opacity: 0;
+    transition: .2s;
+  }
+
+  .boxButtons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: auto;
+    opacity: 0;
+    transition: .2s;
+
+    button{
+      width: 25px;
+      aspect-ratio: 1/1;
+      background-color: transparent;
+      background-position: center;
+      background-size: 17.5px;
+      background-repeat: no-repeat;
+      border: 0;
+      filter: invert(.9);
+      transition: .2s;
+      cursor: pointer;
+
+      &:hover{
+        filter: invert(.7);
+      }
+
+      &:first-child{
+        background-image: url('../assets/trash.png');
+      }
+
+      &:nth-child(2){
+        background-image: url('../assets/pen.png');
+      }
+    }
+  }
+}
+
+.popupMovie{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transform: translateY(-100vh);
+  transition: .4s;
+
+  &.active{
+    transform: translateY(0vh);
+  }
+
+  .container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 30px;
+    padding: 45px;
+    background-color: darken($bgGrey, 9);
+    border-radius: 30px;
+
+    .btnClosePopup{
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      justify-content: center;
+      width: 40px;
+      aspect-ratio: 1/1;
+      background-color: transparent;
+      border: 0;
+      font-size: 40px;
+      line-height: 35px;
+      transition: .2s;
+      cursor: pointer;
+
+      &:hover{
+        color: darken($fontGrey, 15);
+      }
+    }
+
+    .posterPopup{
+      max-width: 200px;
+    }
+
+    #formMovie{
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      margin-left: 45px;
+
+      input{
+        background-color: transparent;
+        border: 0;
+        font-size: 26px;
+        font-weight: 300;
+
+        &:focus{
+          outline: none;
+        }
+
+        &#poster{
+          opacity: 0;
+          height: 0;
+        }
+      }
+
+      .starsLog{
+        margin-right: auto;
+        transform: translateY(-15px);
+        
+        &:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+        }
+
+        &:not(:checked) > label {
+            float: right;
+            width: 1em;
+            white-space: nowrap;
+            font-size: 30px;
+            color: $fontGrey;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        &:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+        & > input:checked ~ label {
+            color: $pink;    
+        }
+
+        &:not(:checked) > label:hover,
+        &:not(:checked) > label:hover ~ label {
+            color: darken($pink, 15);  
+        }
+
+        & > input:checked + label:hover,
+        & > input:checked + label:hover ~ label,
+        & > input:checked ~ label:hover,
+        & > input:checked ~ label:hover ~ label,
+        & > label:hover ~ input:checked ~ label {
+          color: darken($pink, 15); 
+        }
+      }
+
+      button{
+        max-width: 100px;
+        margin-top: auto;
+        padding: 5px 10px;
+        background-color: $pink;
+        border: 0;
+        border-radius: 5px;
+        font-weight: 800;
+        color: $white;
+        transition: .2s;
+        cursor: pointer;
+
+        &:hover{
+          background-color: darken($pink, 8);
+        }
+      }
+    }
+  }
+}
+
+.popupAlert{
+  position: absolute;
+  top: 60px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  transform: translateY(-200px);
+  transition: .6s;
+  z-index: 111;
+
+  &.active{
+    transform: translateY(0px);
+  }
+
+  .container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    margin: 0 30px;
+    padding: 0 45px;
+    background-color: $orange;
+    border-radius: 10px;
+    transition: .2s;
+    cursor: pointer;
+
+    &:hover{
+      background-color: lighten($orange, 7);
+    }
+
+    h5{
+      font-size: 18px;
+      font-weight: 300;
+      color: $white;
+    }
+  }
+}
+
+.popupList{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transform: translateY(-100vh);
+  transition: .4s;
+
+  &.active{
+    transform: translateY(0vh);
+  }
+
+  .container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 30px;
+    padding: 20px 30px;
+    background-color: darken($bgGrey, 9);
+    border-radius: 15px;
+
+    .btnClosePopup{
+      position: absolute;
+      top: 12.5px;
+      right: 30px;
+      display: flex;
+      justify-content: center;
+      width: 40px;
+      aspect-ratio: 1/1;
+      background-color: transparent;
+      border: 0;
+      font-size: 40px;
+      line-height: 35px;
+      transition: .2s;
+      cursor: pointer;
+
+      &:hover{
+        color: darken($fontGrey, 15);
+      }
+    }
+
+    .list{
+      @include scrollBar();
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-height: 400px;
+      overflow-y: auto;
+
+      p{
+        transition: .2s;
+        cursor: pointer;
+
+        &:hover{
+          color: lighten($fontGrey, 30);
+        }
+      }
+    }
+  }
+}
+
+// Main
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: $fontGrey;
+}
+
+body{
+  padding-bottom: 60px;
+  background: $darkGrey;
+  overflow-x: hidden;
+}
+
+// Header
+.Header{
+  display: flex;
+  width: 100%;
+  height: 75px;
+  background-color: $darkGrey;
+
+  .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
+
+    img{
+      width: 100%;
+      max-width: 275px;
+    }
+
+    nav{
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      z-index: 111;
+
+      a{
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1.5px;
+          transition: .2s;
+
+        &:hover{
+          color: lighten($fontGrey, 25);
+        }
+
+        &.logar{
+          padding: 5px 10px;
+          background-color: $pink;
+          border-radius: 5px;
+          font-weight: 800;
+          color: $white;
+
+          &:hover{
+            background-color: darken($pink, 8);
+          }
+        }
+      }
+    }
+    .btnOpen, .btnClose{
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+.Header{
+  .container{
+    nav{
+      position: absolute;
+      top: 0;
+      right: 0;
+      flex-direction: column;
+      justify-content: center;
+      gap: 50px;
+      width: 75vw;
+      height: 100vh;
+      background-color: $darkGrey;
+      transform: translateX(75vw);
+      transition: .4s;
+
+      &.active{
+        transform: translateX(0vw);
+      }
+    }
+
+    .btnOpen{
+      display:contents;
+      width: 40px;
+      aspect-ratio: 1/1;
+      border: 0;
+      font-size: 30px;
+    }
+
+    .btnClose{
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      display: flex;
+      justify-content: center;
+      width: 40px;
+      aspect-ratio: 1/1;
+      background-color: transparent;
+      border: 0;
+      font-size: 40px;
+      line-height: 35px;
+    }
+  }
+}
+}
+
+// Home
+.Home{
+  display: flex;
+  width: 100%;
+  background: linear-gradient(180deg, $bgGrey 0%, $darkGrey 75%); 
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
+
+    h2{
+      margin: 75px 0 40px 0;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: .5px;
+
+      a{
+        text-decoration: none;   
+        color: $white;
+        border-bottom: .5px solid $fontGrey;
+      }
+    }
+  }
+}
+
+// Log - Cadastro do filme
+.Log{
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, $bgGrey 0%, $darkGrey 75%); 
+
+  #filmeForm{
+    opacity: 0;
+  }
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
+
+    .inputSearchMovie{
+      display: flex;
+      width: 65%;
+      margin: 90px auto 60px auto;
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 60px;
+      text-align: center;
+      font-size: 28px;
+
+      &:focus{
+        outline: none;
+      }
+    }
+
+    .moviesSearched{
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+    }
+  }
+}
+
+// Filmes- Lista de filmes assistidos
+.Filmes{
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, $bgGrey 0%, $darkGrey 75%); 
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
+
+    .subtitle{
+      margin-top: 60px;
+    }
+
+    .gridMovies{
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+
+      .poster{
+        cursor: auto;
+      }
+    }
+  }
+}
+
+// Perfil - Listas
+.Perfil{
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, $bgGrey 0%, $darkGrey 75%); 
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
+
+    .subtitle{
+      margin-top: 60px;
+    }
+
+    .favoriteGrid{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+  }
+}

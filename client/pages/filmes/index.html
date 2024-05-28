@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/client/assets/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="/client/index.css">
+  <link rel="shortcut icon" href="../../assets/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../../style/index.css">
   <title>Filmes - Letterbootleg</title>
 </head>
 <body>
   <!-- Header -->
-  <div id="header"></div>
+  <div class="Header">
+    <div class="container">
+      <a href="../../index.html"><img src="../../assets/logo.png" alt="Letterbootleg"></a>
+      <button class="btnOpen" onclick="toggleNav()">&#x2630;</button>
+      <nav>
+        <button class="btnClose" onclick="toggleNav()">&#x292C;</button>
+        <a href="../perfil/index.html">Perfil</a>
+        <a href="../filmes/index.html">Filmes</a>
+        <a href="../log/index.html" class="logar">+ Logar</a>
+      </nav>
+    </div>
+  </div>
 
+  <!-- Body principal: Filmes -->
   <div class="Filmes">
     <div class="container">
       <div class="subtitle">
@@ -22,11 +34,12 @@
     </div>
   </div>
 
-  <div class="popupMovieLog">
+  <!-- Popup p/ editar nota -->
+  <div class="popupMovie">
     <div class="container">
-      <button class="btnClosePopup" onclick="closePopup()">&#x292C;</button>
+      <button class="btnClosePopup" onclick="closePopupMovie()">&#x292C;</button>
       <div class="poster posterPopup"></div>
-      <form id="formLogMovie">
+      <form id="formMovie">
         <input type="text" id="titulo" placeholder="Título" required readonly>
         <input type="text" id="ano" placeholder="Ano" required readonly>
         <input type="text" id="poster" placeholder="Poster" required readonly>
@@ -47,7 +60,20 @@
     </div>
   </div>
 
-  <script src="/client/scripts/jquery.js"></script>
+  <!-- Popup de alerta: filme deletado -->
+  <div class="popupAlert popupDeletar" onclick="togglePopupAlert('popupDeletar', 'close')">
+    <div class="container">
+      <h5>Filme deletado com sucesso!</h5>
+    </div>
+  </div>
+
+  <!-- Popup de alerta: filme cadastrado -->
+  <div class="popupAlert popupEditar" onclick="togglePopupAlert('popupEditar', 'close')">
+    <div class="container">
+      <h5>Filme editado com sucesso!</h5>
+    </div>
+  </div>
+
   <script src="./index.js"></script>
 </body>
 </html>

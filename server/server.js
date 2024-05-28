@@ -9,30 +9,30 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect('mongodb://localhost:27017/filme_cadastro', {
+mongoose.connect('mongodb://localhost:27017/letterbootleg', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Erro de conexão ao MongoDB:'));
+db.on('error', console.error.bind(console, 'Erro de conexão com o Mongo:'));
 db.once('open', () => {
-  console.log('Conectado ao MongoDB');
+  console.log('Conectado ao Mongo');
 });
 
-const filmeSchema = new mongoose.Schema({
+const letterbootlegSchema = new mongoose.Schema({
   titulo: String,
-  poster: String,
   ano: Number,
+  poster: String,
   nota: Number,
   favorito: Boolean,
 });
 
-const Filme = mongoose.model('Filme', filmeSchema);
+const letterbootleg = mongoose.model('filme', letterbootlegSchema);
 
 app.get('/filmes', async (req, res) => {
   try {
-    const filmes = await Filme.find();
+    const filmes = await letterbootleg.find();
     res.json(filmes);
   } catch (err) {
     res.status(500).send(err);
@@ -40,7 +40,7 @@ app.get('/filmes', async (req, res) => {
 });
 
 app.post('/filmes', async (req, res) => {
-  const novoFilme = new Filme(req.body);
+  const novoFilme = new letterbootleg(req.body);
   try {
     const filmeSalvo = await novoFilme.save();
     res.status(201).json(filmeSalvo);
@@ -51,11 +51,11 @@ app.post('/filmes', async (req, res) => {
 
 app.delete('/filmes/:id', async (req, res) => {
   try {
-    const filme = await Filme.findByIdAndDelete(req.params.id);
+    const filme = await letterbootleg.findByIdAndDelete(req.params.id);
     if (!filme) {
       return res.status(404).send('Filme não encontrado');
     }
-    res.status(200).send('Filme deletado com sucesso');
+    res.status(200).send('Filme deletado!');
   } catch (err) {
     res.status(500).send(err);
   }
@@ -63,7 +63,7 @@ app.delete('/filmes/:id', async (req, res) => {
 
 app.put('/filmes/:id', async (req, res) => {
   try {
-    const filme = await Filme.findByIdAndUpdate(req.params.id, req.body, {
+    const filme = await letterbootleg.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
@@ -77,5 +77,5 @@ app.put('/filmes/:id', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Rodando em http://localhost:${port}`);
 });

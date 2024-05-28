@@ -3,16 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/client/assets/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="./index.css">
-  <link rel="stylesheet" href="/client/node_modules/@splidejs/splide/dist/css/splide.min.css">
-  <link rel="stylesheet" href="/client/node_modules/@splidejs/splide/dist/css/splide-core.min.css">
+  <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./style/index.css">
+  <link rel="stylesheet" href="./node_modules/@splidejs/splide/dist/css/splide.min.css">
+  <link rel="stylesheet" href="./node_modules/@splidejs/splide/dist/css/splide-core.min.css">
   <title>Letterbootleg</title>
 </head>
 <body>
   <!-- Header -->
-  <div id="header"></div>
+  <div class="Header">
+    <div class="container">
+      <a href="./index.html"><img src="./assets/logo.png" alt="Letterbootleg"></a>
+      <button class="btnOpen" onclick="toggleNav()">&#x2630;</button>
+      <nav>
+        <button class="btnClose" onclick="toggleNav()">&#x292C;</button>
+        <a href="./pages/perfil/index.html">Perfil</a>
+        <a href="./pages/filmes/index.html">Filmes</a>
+        <a href="./pages/log/index.html" class="logar">+ Logar</a>
+      </nav>
+    </div>
+  </div>
 
+  <!-- Body principal: Home -->
   <div class="Home">
     <div class="container">
       <h2>Oi de novo! Aqui estão alguns dos lançamentos mais recentes...</h2>
@@ -41,9 +53,8 @@
     </div>
   </div>
 
-  <script src="/client/scripts/jquery.js"></script>
-  <script src="/client//node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
-  <script src="/client//scripts/carousel.js"></script>
+  <!-- Scripts -->
+  <script src="./node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
   <script src="./index.js"></script>
 </body>
 </html>

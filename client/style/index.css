@@ -1,0 +1,507 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.subtitle h5 {
+  padding: 4px 0;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.subtitle hr {
+  opacity: 0.5;
+  margin-bottom: 10px;
+}
+
+.poster {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  aspect-ratio: 1/1.5;
+  padding: 10px 5px;
+  background-size: cover;
+  border: 1px solid #9ab;
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.poster:hover {
+  opacity: 0.75;
+}
+.poster:hover a, .poster:hover .boxButtons {
+  opacity: 1;
+}
+.poster a {
+  width: 50px;
+  background-color: rgba(20, 24, 28, 0.85);
+  border: 1px solid #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  opacity: 0;
+  transition: 0.2s;
+}
+.poster .boxButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: auto;
+  opacity: 0;
+  transition: 0.2s;
+}
+.poster .boxButtons button {
+  width: 25px;
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  background-position: center;
+  background-size: 17.5px;
+  background-repeat: no-repeat;
+  border: 0;
+  filter: invert(0.9);
+  transition: 0.2s;
+  cursor: pointer;
+}
+.poster .boxButtons button:hover {
+  filter: invert(0.7);
+}
+.poster .boxButtons button:first-child {
+  background-image: url("../assets/trash.png");
+}
+.poster .boxButtons button:nth-child(2) {
+  background-image: url("../assets/pen.png");
+}
+
+.popupMovie {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transform: translateY(-100vh);
+  transition: 0.4s;
+}
+.popupMovie.active {
+  transform: translateY(0vh);
+}
+.popupMovie .container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 30px;
+  padding: 45px;
+  background-color: #0c0f12;
+  border-radius: 30px;
+}
+.popupMovie .container .btnClosePopup {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  border: 0;
+  font-size: 40px;
+  line-height: 35px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.popupMovie .container .btnClosePopup:hover {
+  color: #6b849c;
+}
+.popupMovie .container .posterPopup {
+  max-width: 200px;
+}
+.popupMovie .container #formMovie {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-left: 45px;
+}
+.popupMovie .container #formMovie input {
+  background-color: transparent;
+  border: 0;
+  font-size: 26px;
+  font-weight: 300;
+}
+.popupMovie .container #formMovie input:focus {
+  outline: none;
+}
+.popupMovie .container #formMovie input#poster {
+  opacity: 0;
+  height: 0;
+}
+.popupMovie .container #formMovie .starsLog {
+  margin-right: auto;
+  transform: translateY(-15px);
+}
+.popupMovie .container #formMovie .starsLog:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+.popupMovie .container #formMovie .starsLog:not(:checked) > label {
+  float: right;
+  width: 1em;
+  white-space: nowrap;
+  font-size: 30px;
+  color: #9ab;
+  overflow: hidden;
+  cursor: pointer;
+}
+.popupMovie .container #formMovie .starsLog:not(:checked) > label:before {
+  content: "★ ";
+}
+.popupMovie .container #formMovie .starsLog > input:checked ~ label {
+  color: #FF008F;
+}
+.popupMovie .container #formMovie .starsLog:not(:checked) > label:hover, .popupMovie .container #formMovie .starsLog:not(:checked) > label:hover ~ label {
+  color: #b30064;
+}
+.popupMovie .container #formMovie .starsLog > input:checked + label:hover, .popupMovie .container #formMovie .starsLog > input:checked + label:hover ~ label, .popupMovie .container #formMovie .starsLog > input:checked ~ label:hover, .popupMovie .container #formMovie .starsLog > input:checked ~ label:hover ~ label, .popupMovie .container #formMovie .starsLog > label:hover ~ input:checked ~ label {
+  color: #b30064;
+}
+.popupMovie .container #formMovie button {
+  max-width: 100px;
+  margin-top: auto;
+  padding: 5px 10px;
+  background-color: #FF008F;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 800;
+  color: #fff;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.popupMovie .container #formMovie button:hover {
+  background-color: #d60078;
+}
+
+.popupAlert {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  transform: translateY(-200px);
+  transition: 0.6s;
+  z-index: 111;
+}
+.popupAlert.active {
+  transform: translateY(0px);
+}
+.popupAlert .container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  margin: 0 30px;
+  padding: 0 45px;
+  background-color: #FF793A;
+  border-radius: 10px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.popupAlert .container:hover {
+  background-color: #ff915e;
+}
+.popupAlert .container h5 {
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+}
+
+.popupList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transform: translateY(-100vh);
+  transition: 0.4s;
+}
+.popupList.active {
+  transform: translateY(0vh);
+}
+.popupList .container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 30px;
+  padding: 20px 30px;
+  background-color: #0c0f12;
+  border-radius: 15px;
+}
+.popupList .container .btnClosePopup {
+  position: absolute;
+  top: 12.5px;
+  right: 30px;
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  border: 0;
+  font-size: 40px;
+  line-height: 35px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.popupList .container .btnClosePopup:hover {
+  color: #6b849c;
+}
+.popupList .container .list {
+  overflow: hidden auto;
+  scrollbar-width: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.popupList .container .list::-webkit-scrollbar {
+  width: 2px;
+  height: 12px;
+}
+.popupList .container .list::-webkit-scrollbar-thumb {
+  background: #495866;
+  border-radius: 15px;
+}
+.popupList .container .list p {
+  transition: 0.2s;
+  cursor: pointer;
+}
+.popupList .container .list p:hover {
+  color: #f5f7f8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: #9ab;
+}
+
+body {
+  padding-bottom: 60px;
+  background: #14181C;
+  overflow-x: hidden;
+}
+
+.Header {
+  display: flex;
+  width: 100%;
+  height: 75px;
+  background-color: #14181C;
+}
+.Header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Header .container img {
+  width: 100%;
+  max-width: 275px;
+}
+.Header .container nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  z-index: 111;
+}
+.Header .container nav a {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  transition: 0.2s;
+}
+.Header .container nav a:hover {
+  color: #e6eaee;
+}
+.Header .container nav a.logar {
+  padding: 5px 10px;
+  background-color: #FF008F;
+  border-radius: 5px;
+  font-weight: 800;
+  color: #fff;
+}
+.Header .container nav a.logar:hover {
+  background-color: #d60078;
+}
+.Header .container .btnOpen, .Header .container .btnClose {
+  display: none;
+}
+
+@media only screen and (max-width: 850px) {
+  .Header .container nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    width: 75vw;
+    height: 100vh;
+    background-color: #14181C;
+    transform: translateX(75vw);
+    transition: 0.4s;
+  }
+  .Header .container nav.active {
+    transform: translateX(0vw);
+  }
+  .Header .container .btnOpen {
+    display: contents;
+    width: 40px;
+    aspect-ratio: 1/1;
+    border: 0;
+    font-size: 30px;
+  }
+  .Header .container .btnClose {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    border: 0;
+    font-size: 40px;
+    line-height: 35px;
+  }
+}
+.Home {
+  display: flex;
+  width: 100%;
+  background: linear-gradient(180deg, #1F262D 0%, #14181C 75%);
+}
+.Home .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Home .container h2 {
+  margin: 75px 0 40px 0;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+.Home .container h2 a {
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 0.5px solid #9ab;
+}
+
+.Log {
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, #1F262D 0%, #14181C 75%);
+}
+.Log #filmeForm {
+  opacity: 0;
+}
+.Log .container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Log .container .inputSearchMovie {
+  display: flex;
+  width: 65%;
+  margin: 90px auto 60px auto;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 60px;
+  text-align: center;
+  font-size: 28px;
+}
+.Log .container .inputSearchMovie:focus {
+  outline: none;
+}
+.Log .container .moviesSearched {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+}
+
+.Filmes {
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, #1F262D 0%, #14181C 75%);
+}
+.Filmes .container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Filmes .container .subtitle {
+  margin-top: 60px;
+}
+.Filmes .container .gridMovies {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+}
+.Filmes .container .gridMovies .poster {
+  cursor: auto;
+}
+
+.Perfil {
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, #1F262D 0%, #14181C 75%);
+}
+.Perfil .container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Perfil .container .subtitle {
+  margin-top: 60px;
+}
+.Perfil .container .favoriteGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}/*# sourceMappingURL=index.css.map */
