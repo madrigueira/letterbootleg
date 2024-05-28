@@ -10,16 +10,16 @@ formLogMovie.addEventListener('submit', async (e) => {
     const ano = document.getElementById('ano').value;
     const poster = document.getElementById('poster').value;
     const nota = document.querySelector('input[name="nota"]:checked').value;
+    const favorito = false
 
     const response = await fetch('http://localhost:3000/filmes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ titulo, ano, poster, nota })
+        body: JSON.stringify({ titulo, ano, poster, nota, favorito })
     });
 
-    console.log(nota)
     alert("filme cadastrado!")
 });
 

@@ -25,6 +25,7 @@ const filmeSchema = new mongoose.Schema({
   poster: String,
   ano: Number,
   nota: Number,
+  favorito: Boolean,
 });
 
 const Filme = mongoose.model('Filme', filmeSchema);

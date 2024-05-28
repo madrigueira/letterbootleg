@@ -34,6 +34,7 @@
 }
 
 body {
+  padding-bottom: 60px;
   background: #14181C;
   overflow-x: hidden;
 }
@@ -315,11 +316,13 @@ body {
   max-width: 1000px;
   padding: 0 30px;
 }
+.Filmes .container .subtitle {
+  margin-top: 60px;
+}
 .Filmes .container .gridMovies {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 15px;
-  margin-top: 60px;
 }
 .Filmes .container .gridMovies .poster {
   display: flex;
@@ -344,4 +347,35 @@ body {
 }
 .Filmes .container .gridMovies .poster button {
   height: 30px;
+}
+
+.Perfil {
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  background: linear-gradient(180deg, #1F262D 0%, #14181C 75%);
+}
+.Perfil .container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 30px;
+}
+.Perfil .container .subtitle {
+  margin-top: 60px;
+}
+.Perfil .container .favoriteGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+.Perfil .container .favoriteGrid button {
+  width: 20px;
+  height: 20px;
+}
+.Perfil .container .test {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=index.css.map */
