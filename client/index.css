@@ -341,4 +341,7 @@ body {
   color: #fff;
   transition: 0.2s;
   opacity: 0;
+}
+.Filmes .container .gridMovies .poster button {
+  height: 30px;
 }/*# sourceMappingURL=index.css.map */

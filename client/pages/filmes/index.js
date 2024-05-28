@@ -52,10 +52,10 @@ function editFilme(filme) {
   document.querySelector(`input[name="nota"][value="${filme.nota}"]`).checked = true;
 
   const formLogMovie = document.getElementById('formLogMovie');
+  console.log(filme.titulo)
 
   formLogMovie.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
       const nota = document.querySelector('input[name="nota"]:checked').value;
   
       const response = await fetch(`http://localhost:3000/filmes/${filme._id}`, {
@@ -66,16 +66,14 @@ function editFilme(filme) {
         body: JSON.stringify({ nota })
       });
   
-      console.log(nota)
-      alert("filme cadastrado!")
-  });
-
-  if (response.ok) {
-    filmeList.innerHTML = ''
-    loadFilmes();
-} else {
-    alert('Erro ao deletar filme');
-}
+      if (response.ok) {
+        alert("filme cadastrado!")
+        filmeList.innerHTML = ''
+        loadFilmes();
+    } else {
+        alert('Erro ao deletar filme');
+    }
+  }, { once: true });
 }
 
 function closePopup(){
