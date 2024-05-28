@@ -6,24 +6,63 @@ Projeto de site para cadastro e classificação dos seus filmes assistidos utili
 
 
 ## 📝 Conteúdo
-- <a href="#features">Features</a>
-- <a href="#pré-requisitos">Pré-requisitos</a>
-- <a href="#tecnologias">Tecnologias</a>
-- <a href="#mapa-do-projeto">Mapa do Projeto</a>
+- [Features](#features)
+- [Pré-requisitos](#pre-requisitos)
+- [Tecnologias](#tecnologias)
+- [Mapa do Projeto](#mapa-do-projeto)
 
 
-## 💡 Features
-- 🔄 Cadastro e Login do usuário
-- 🔄 Exibição e Pesquisa de filmes
-- 🔄 Cadastro de filmes no perfil
-- 🔄 Avaliação de filmes assistidos
-- 🔄 Lista de <i>Assistir mais tarde</i>
-- 🔄 Lista de Favoritos
-- 🔄 Adicionar os 4 favoritos no perfil
+## 💡 Features <a id="features"></a>
+- ✅ Exibição e Pesquisa de filmes
+- ✅ Cadastro de filmes no perfil
+- ✅ Avaliação de filmes assistidos
+- ✅ Lista de Favoritos
+- ✅ Adicionar os 4 favoritos no perfil
 
 
-## 💻 Pré-requisitos
+## 💻 Pré-requisitos <a id="pre-requisitos"></a>
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas: [Git](https://git-scm.com/), [Node](https://nodejs.org/en), [npm](https://www.npmjs.com/) e [MongoDB](https://www.mongodb.com/try/download/community) (Community Server). *Vericiar se o MongoDB Database Server está rodando no gerenciador de tarefas*.
 
-## ⚙️ Tecnologias
+Para rodar o projeto você deve clonar o repositório e iniciar o server.js
+```bash
+# Clone este repositório
+$ git clone https://github.com/madrigueira/letterbootleg.git
 
-## 📂 Mapa do Projeto
+# Acesse a pasta client e instale os pacotes necessários
+$ cd letterbootleg/client
+$ npm i
+
+# Acesse a pasta server e instale os pacotes necessários
+$ cd ../server
+$ npm i
+
+# Rode o servidor Express para fazer conexão com o MongoDB e configurar os endpoints
+$ node server.js
+
+# Rodando em http://localhost:3000
+# Conectado ao Mongo
+```
+Agora basta abrir o arquivo client/index.html e cadastrar seus filmes :)
+
+## ⚙️ Tecnologias <a id="tecnologias"></a>
+- HTML
+- [Sass](https://sass-lang.com/)
+- Javascript
+- [Node](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/) 
+- [MongoDB](https://www.mongodb.com/try/download/community)
+
+
+## 📂 Mapa do Projeto <a id="mapa-do-projeto"></a>
+```bash
+├───client  #Front do projeto
+│   ├───assets
+│   ├───node_modules
+│   ├───pages
+│   │   ├───filmes
+│   │   ├───log
+│   │   └───perfil
+│   └───style
+└───server  #Back do projeto
+    └───node_modules
+```

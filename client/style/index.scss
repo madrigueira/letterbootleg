@@ -85,11 +85,12 @@ $orange: #FF793A;
     button{
       width: 25px;
       aspect-ratio: 1/1;
-      background-color: transparent;
+      background-color: transparentize($white, .15);
       background-position: center;
-      background-size: 17.5px;
+      background-size: 15px;
       background-repeat: no-repeat;
       border: 0;
+      border-radius: 5px;
       filter: invert(.9);
       transition: .2s;
       cursor: pointer;

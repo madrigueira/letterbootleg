@@ -53,11 +53,12 @@
 .poster .boxButtons button {
   width: 25px;
   aspect-ratio: 1/1;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.85);
   background-position: center;
-  background-size: 17.5px;
+  background-size: 15px;
   background-repeat: no-repeat;
   border: 0;
+  border-radius: 5px;
   filter: invert(0.9);
   transition: 0.2s;
   cursor: pointer;

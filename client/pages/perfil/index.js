@@ -19,6 +19,7 @@ function preencherDivs() {
   for (var i = currentDivs; i < 4; i++) {
     var fakePoster = document.createElement("div");
     fakePoster.className = "poster";
+    fakePoster.style.backgroundImage = `url(../../assets/add-poster.png)`;
     favoriteGrid.appendChild(fakePoster);
 
     fakePoster.addEventListener("click", async function () {
@@ -41,6 +42,11 @@ function preencherDivs() {
         );
         list.appendChild(tituloFilme);
       });
+
+      if(list.querySelectorAll("p").length == 0){
+        list.innerHTML = "<h5>Cadastre mais filmes para adicionar aqui :)</h5>";
+      }
+
     });
   }
 }
